@@ -3,6 +3,7 @@ from django.utils.timezone import now
 
 
 class Angle(models.Model):
+    user = models.CharField(max_length=20)
     # does data need to be a float or an int?
     U_x = models.FloatField()
     U_y = models.FloatField()
