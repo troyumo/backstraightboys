@@ -1,13 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import Navi from "./components/NavigationBar";
+import Main from "./components/Main/Main.js";
+import Navi from "./components/Navigation Bar/NavigationBar";
 
 function App() {
   return (
-    <div className="App">
-      <div className="Navi">
+    <div className="container">
         <Navi />
-      </div>
+        <Main />
     </div>
   );
 }

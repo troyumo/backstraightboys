@@ -1,0 +1,10 @@
+.Angle {
+  border: 1px solid green ;
+  /*min-height: 100%;*/
+}
+
+.Angle > table, th, td {
+  border: 1px solid black;
+  padding: 5px;
+  height: 100%;
+}

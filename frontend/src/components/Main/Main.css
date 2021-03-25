@@ -1,0 +1,46 @@
+main {
+  background: black;
+  grid-area: main;
+  overflow-y: auto;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome > h1 {
+  font-size: 24px;
+  color: darkslategrey;
+  margin-bottom: 5px;
+}
+
+.mainContainer {
+  padding: 16px 28px;
+  text-align: center;
+  color: grey;
+  background: mintcream; /* for non-css3 browsers */
+  background: -webkit-gradient(linear, left top, left bottom, from(rgb(20,114,199)), to(rgb(11,61,122))); /* for webkit browsers */
+  background: -moz-linear-gradient(top,  rgb(20,114,199),  rgb(11,61,122)); /* for firefox 3.6+ */
+  /*gradient code from http://www.webdesignerwall.com/tutorials/cross-browser-css-gradient*/
+
+  display: grid;
+  grid-gap: 5px;
+}
+
+.firstRow {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.secondRow {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.postureVisualizer {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 10px;
+}

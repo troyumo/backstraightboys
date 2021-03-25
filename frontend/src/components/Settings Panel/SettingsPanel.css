@@ -1,0 +1,6 @@
+.settings {
+  border: 1px solid green;
+}
+.settings > table {
+  border-collapse: collapse;
+}
