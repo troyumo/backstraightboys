@@ -1,6 +1,11 @@
 .settings {
   border: 1px solid green;
+  padding: 5px;
 }
 .settings > table {
   border-collapse: collapse;
+}
+
+.submit-button {
+  padding: 5px;
 }

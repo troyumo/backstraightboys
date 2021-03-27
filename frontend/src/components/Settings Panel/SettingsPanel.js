@@ -10,6 +10,7 @@ export default class SettingsPanel extends React.Component {
             duration: 'medium',
             frequency: 'medium',
             strength: 'medium',
+            position: 'sitting',
             operationMode: 'training',
             silentMode: false
         };
@@ -32,6 +33,7 @@ export default class SettingsPanel extends React.Component {
             '\nNotification Duration: ' + this.state.duration +
             '\nNotification Frequency: ' + this.state.frequency +
             '\nNotification Strength: ' + this.state.strength +
+            '\nBody Position: ' + this.state.position +
             '\nOperation Mode: ' + this.state.operationMode +
             '\nSilent Mode: ' + this.state.silentMode);
         event.preventDefault();
@@ -84,6 +86,15 @@ export default class SettingsPanel extends React.Component {
                                 </td>
                             </tr>
                             <tr>
+                                <th>Body Position</th>
+                                <td>
+                                    <select name="position" onChange={this.handleChange}>
+                                        <option selected value="sitting">Sitting</option>
+                                        <option value="standing">Standing</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>Operation Mode</th>
                                 <td>
                                     <select name="operationMode" onChange={this.handleChange}>
@@ -103,7 +114,7 @@ export default class SettingsPanel extends React.Component {
                             </tr>
                         </tbody>
                     </table>
-                    <div>
+                    <div className="submit-button">
                         <input type="submit" value="Save" />
                     </div>
                 </form>

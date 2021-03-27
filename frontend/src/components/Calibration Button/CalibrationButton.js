@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import Modal from './Modal';
+import Timer from './Timer'
 
 class CalibrationButton extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             show: false
         };
@@ -11,10 +12,6 @@ class CalibrationButton extends Component {
         this.hideModal = this.hideModal.bind(this);
     }
 
-    startCalibration = () => {
-        this.showModal();
-        // Timer().restartTimer
-    };
 
     showModal = () => {
         this.setState({show: true});
@@ -27,7 +24,14 @@ class CalibrationButton extends Component {
     render() {
         return (
             <div className="button">
-                <Modal show={this.state.show} handleClose={this.hideModal}/>
+                <Modal show={this.state.show} handleClose={this.hideModal}>
+                    <h3>Sit up straight, it's time to calibrate!</h3>
+                    <p>
+                        The device will calibrate for 10 seconds.<br/>
+                        Visit the resources page for a visualization of how to sit with proper posture.
+                    </p>
+                    <Timer />
+                </Modal>
                 <button type="button" onClick={this.showModal}>
                     Start Calibration
                 </button>

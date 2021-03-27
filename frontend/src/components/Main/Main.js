@@ -25,14 +25,14 @@ const Main = () => {
               </div>
               <h3> </h3>
               <div className="secondRow">
-                  <div className="postureVisualizer">
+                  {/*<div className="postureVisualizer">*/}
                       <div className="angleView">
                           <AngleDisplay />
                       </div>
                       <div className="figureView">
                           <FigureDisplay />
                       </div>
-                  </div>
+                  {/*</div>*/}
                   <div className="SettingsBox">
                       <SettingsPanel />
                   </div>
