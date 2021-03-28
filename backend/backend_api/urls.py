@@ -4,6 +4,9 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'angles', views.AngleViewSet)
+router.register(r'users', views.UserViewSet)
+router.register(r'settings', views.SettingsViewSet)
+router.register(r'notifications', views.NotificationsViewSet)
 
 # Wire API using automatic URL routing
 # Additionally, include login URLs for the browsable API
