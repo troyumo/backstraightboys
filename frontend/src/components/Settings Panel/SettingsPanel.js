@@ -1,41 +1,60 @@
-import React from "react";
+import React, { Component } from "react";
+import axios from "axios";
+
 import './SettingsPanel.css'
 
-export default class SettingsPanel extends React.Component {
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+
+
+export default class SettingsPanel extends Component {
     constructor(props)
     {
         super(props);
         this.state = {
-            sensitivity: 'medium',
-            duration: 'medium',
-            frequency: 'medium',
-            strength: 'medium',
-            position: 'sitting',
-            operationMode: 'training',
-            silentMode: false
+            settings: {
+                sensitivity: 'medium',
+                duration: 'medium',
+                frequency: 'medium',
+                strength: 'medium',
+                position: 'sitting',
+                operationMode: 'training',
+                silentMode: false
+            }
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.retrieveSettings = this.retrieveSettings.bind(this);
+    }
+
+    componentDidMount() {
+        this.retrieveSettings();
+    }
+
+    retrieveSettings() {
+        axios.get('http://localhost:8000/settings/?user=1')
+            .then(res => {
+                this.setState({settings: res.data[0]});
+            })
+            .catch(err => console.log(err))
     }
 
     handleChange(event) {
+        event.persist();
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-        console.log('value is: ' + value + '\nand name is: ' + event.target.name);
-        this.setState({
-            [event.target.name]: value
-        });
+        this.setState(prevState => ({
+            settings: { ...prevState.settings, [event.target.name]: value }
+        }))
     }
 
     handleSubmit(event) {
-        alert('You have made the following selections:' +
-            '\nSensitivity: '+ this.state.sensitivity +
-            '\nNotification Duration: ' + this.state.duration +
-            '\nNotification Frequency: ' + this.state.frequency +
-            '\nNotification Strength: ' + this.state.strength +
-            '\nBody Position: ' + this.state.position +
-            '\nOperation Mode: ' + this.state.operationMode +
-            '\nSilent Mode: ' + this.state.silentMode);
+        axios.put(`http://localhost:8000/settings/${this.state.settings.id}/`, this.state.settings)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+            .catch(err => console.log(err))
         event.preventDefault();
     }
 
@@ -48,9 +67,10 @@ export default class SettingsPanel extends React.Component {
                             <tr>
                                 <th>Sensitivity</th>
                                 <td>
-                                    <select name="sensitivity" onChange={this.handleChange}>
+                                    <select name="sensitivity" onChange={this.handleChange}
+                                            value={this.state.settings.sensitivity}>
                                         <option value="low">Low</option>
-                                        <option selected value="medium">Medium</option>
+                                        <option value="medium">Medium</option>
                                         <option value="high">High</option>
                                     </select>
                                 </td>
@@ -58,9 +78,10 @@ export default class SettingsPanel extends React.Component {
                             <tr>
                                 <th>Vibration Duration</th>
                                 <td>
-                                    <select name="duration" onChange={this.handleChange}>
+                                    <select name="duration" onChange={this.handleChange}
+                                            value={this.state.settings.duration}>
                                         <option value="short">Short</option>
-                                        <option selected value="medium">Medium</option>
+                                        <option value="medium">Medium</option>
                                         <option value="long">Long</option>
                                     </select>
                                 </td>
@@ -68,9 +89,10 @@ export default class SettingsPanel extends React.Component {
                             <tr>
                                 <th>Vibration Frequency</th>
                                 <td>
-                                    <select name="frequency" onChange={this.handleChange}>
+                                    <select name="frequency" onChange={this.handleChange}
+                                            value={this.state.settings.frequency}>
                                         <option value="low">Low</option>
-                                        <option selected value="medium">Medium</option>
+                                        <option value="medium">Medium</option>
                                         <option value="high">High</option>
                                     </select>
                                 </td>
@@ -78,9 +100,10 @@ export default class SettingsPanel extends React.Component {
                             <tr>
                                 <th>Vibration Strength</th>
                                 <td>
-                                    <select name="strength" onChange={this.handleChange}>
+                                    <select name="strength" onChange={this.handleChange}
+                                            value={this.state.settings.strength}>
                                         <option value="low">Low</option>
-                                        <option selected value="medium">Medium</option>
+                                        <option value="medium">Medium</option>
                                         <option value="high">High</option>
                                     </select>
                                 </td>
@@ -88,8 +111,9 @@ export default class SettingsPanel extends React.Component {
                             <tr>
                                 <th>Body Position</th>
                                 <td>
-                                    <select name="position" onChange={this.handleChange}>
-                                        <option selected value="sitting">Sitting</option>
+                                    <select name="position" onChange={this.handleChange}
+                                            value={this.state.settings.position}>
+                                        <option value="sitting">Sitting</option>
                                         <option value="standing">Standing</option>
                                     </select>
                                 </td>
@@ -97,8 +121,9 @@ export default class SettingsPanel extends React.Component {
                             <tr>
                                 <th>Operation Mode</th>
                                 <td>
-                                    <select name="operationMode" onChange={this.handleChange}>
-                                        <option selected value="training">Training</option>
+                                    <select name="operationMode" onChange={this.handleChange}
+                                            defaultValue={this.state.settings.operationMode}>
+                                        <option value="training">Training</option>
                                         <option value="tracking">Tracking</option>
                                     </select>
                                 </td>
@@ -108,7 +133,8 @@ export default class SettingsPanel extends React.Component {
                                 <td>
                                     <input name="silentMode"
                                            type="checkbox"
-                                           onChange={this.handleChange}>
+                                           onChange={this.handleChange}
+                                           checked={this.state.settings.silentMode}>
                                     </input>
                                 </td>
                             </tr>
