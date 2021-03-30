@@ -14,7 +14,7 @@ class AngleSerializer(serializers.ModelSerializer):
         model = Angle
         fields = ['id', 'A_x_upper', 'A_z_upper', 'G_y_upper',
                   'A_x_lower', 'A_z_lower', 'G_y_lower',
-                  'time', 'calibration', 'user']
+                  'date', 'time', 'calibration', 'user']
 
 
 class SettingsSerializer(serializers.ModelSerializer):
@@ -27,4 +27,4 @@ class SettingsSerializer(serializers.ModelSerializer):
 class NotificationsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notifications
-        fields = ['id', 'message', 'time', 'user']
+        fields = ['id', 'message', 'date', 'time', 'user']

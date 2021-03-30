@@ -18,7 +18,8 @@ class Angle(models.Model):
     A_x_lower = models.FloatField()
     A_z_lower = models.FloatField()
     G_y_lower = models.FloatField()
-    time = models.DateTimeField(default=now, null=False)
+    date = models.DateField(default=now, null=False)
+    time = models.TimeField(default=now, null=False)
     calibration = models.BooleanField(default=False)
 
     def __str__(self):
@@ -39,4 +40,5 @@ class Settings(models.Model):
 class Notifications(models.Model):
     user = models.ForeignKey(User, related_name='notifications', on_delete=models.CASCADE, null=True)
     message = models.CharField(max_length=128)
-    time = models.DateTimeField(default=now, null=False)
+    date = models.DateField(default=now, null=False)
+    time = models.TimeField(default=now, null=False)
