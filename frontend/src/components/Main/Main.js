@@ -1,11 +1,11 @@
 import "./Main.css"
-import SettingsPanel from "../Settings Panel/SettingsPanel";
-import CalibrationButton from "../Calibration Button/CalibrationButton";
-import Statistics from "../Statistics/Statistics";
-import AngleDisplay from "../Angle/Angle";
-import FigureDisplay from "../Figure/Figure";
-import Graph from "../Graph/Graph";
-import Welcome from "../Welcome/Welcome";
+import SettingsPanel from "./Settings Panel/SettingsPanel";
+import CalibrationButton from "./Calibration Button/CalibrationButton";
+import Statistics from "./Statistics/Statistics";
+import CurrentPosture from "./CurrentPosture/CurrentPosture";
+import FigureDisplay from "./Figure/Figure";
+import Graph from "./Graph/Graph";
+import Welcome from "./Welcome/Welcome";
 import React from "react";
 
 const Main = () => {
@@ -27,7 +27,7 @@ const Main = () => {
               <div className="secondRow">
                   {/*<div className="postureVisualizer">*/}
                       <div className="angleView">
-                          <AngleDisplay />
+                          <CurrentPosture />
                       </div>
                       <div className="figureView">
                           <FigureDisplay />

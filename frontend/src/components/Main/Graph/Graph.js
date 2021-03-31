@@ -47,6 +47,7 @@ export default class Graph extends React.Component {
                     <Line
                         data={data}
                         options={{
+                            responsive: true,
                             maintainAspectRatio: false,
                             title:{
                                 display:true,
@@ -64,6 +65,7 @@ export default class Graph extends React.Component {
                     <Line
                         data={data2}
                         options={{
+                            responsive: true,
                             maintainAspectRatio: false,
                             title:{
                                 display:true,

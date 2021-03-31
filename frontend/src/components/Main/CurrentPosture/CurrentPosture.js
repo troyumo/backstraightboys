@@ -1,7 +1,7 @@
 import React from "react";
-import './Angle.css';
+import './CurrentPosture.css';
 
-export default function AngleDisplay() {
+export default function CurrentPosture() {
     // function getAngles() {
     //     // do something
     // }

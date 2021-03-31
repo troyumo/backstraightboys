@@ -6,10 +6,10 @@ from .models import Angle, User, Settings, Notifications
 
 
 class AngleViewSet(viewsets.ModelViewSet):
-    queryset = Angle.objects.all().order_by('time')
+    queryset = Angle.objects.all().order_by('-date', '-time')
     serializer_class = AngleSerializer
     filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ['user', 'calibration']
+    filterset_fields = ['user', 'calibration', 'date']
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -25,7 +25,7 @@ class SettingsViewSet(viewsets.ModelViewSet):
 
 
 class NotificationsViewSet(viewsets.ModelViewSet):
-    queryset = Notifications.objects.all().order_by('time')
+    queryset = Notifications.objects.all().order_by('-date', '-time')
     serializer_class = NotificationsSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ['user']
