@@ -173,4 +173,28 @@ function receive(data) {
   //log(data, 'in');
 }
 
+function send(data) { //command
+  data = String(data);
+
+  if (!data || !characteristicCache) {
+    return;
+  }
+  // if()
+	  // data = calibration
+  // else if()
+  	  // data = sensitivity_low/medium/high
+	  // data = vibration_duration_low/medium/high
+	  // data = vibration_frequency_low/medium/high
+	  // data = vibration_strength_low/medium/high
+	  // data = body_position_low/medium/high
+	  // data = operation_mode_low/medium/high
+	  // data = silent_mode_low/medium/high
+  writeToCharacteristic(characteristicCache, data);
+  //log(data, 'out');
+}
+
+function writeToCharacteristic(characteristic, data) {
+  characteristic.writeValue(new TextEncoder().encode(data));
+}
+
 
