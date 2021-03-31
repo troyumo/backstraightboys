@@ -28,4 +28,4 @@ class NotificationsViewSet(viewsets.ModelViewSet):
     queryset = Notifications.objects.all().order_by('-date', '-time')
     serializer_class = NotificationsSerializer
     filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ['user']
+    filterset_fields = ['user', 'date']
