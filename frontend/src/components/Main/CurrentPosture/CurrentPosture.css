@@ -7,5 +7,16 @@
 .Angle > table, th, td {
   border: 1px solid black;
   padding: 5px;
-  height: 100%;
+}
+
+.PostureVisualizer {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 10px;
+}
+
+.StickFigure {
+  border: 1px solid green;
+  padding: 5px;
+  background-color: dimgrey;
 }

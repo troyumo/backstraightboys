@@ -38,9 +38,3 @@ main {
   display: flex;
   justify-content: space-evenly;
 }
-
-.postureVisualizer {
-  display: grid;
-  grid-auto-flow: column;
-  grid-column-gap: 10px;
-}
