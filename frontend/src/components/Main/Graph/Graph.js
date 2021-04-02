@@ -1,122 +1,155 @@
 import React from "react";
 import "./Graph.css";
+import axios from "axios";
 
-import { Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-3";
 
-const data = {
-  labels: ["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm"],
-  datasets: [
-    {
-      label: "Upper Back",
-      data: [3.3, 5.3, 8.5, 4.1, 4.4, 6.5],
-      fill: false,
-      borderColor: "rgba(75,192,192,1)"
-    },
-    {
-      label: "Lower Back",
-      data: [3.3, 2.5, 3.5, 5.1, 5.4, 7.6],
-      fill: false,
-      borderColor: "#742774"
-    }
-  ]
-};
-
-const data2 = {
-  labels: ["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm"],
-  datasets: [
-    {
-      label: "Upper Back",
-      data: [1.3, 4.3, 4.5, 2.1, 1.4, 5.5],
-      fill: false,
-      borderColor: "rgba(75,192,192,1)"
-    },
-    {
-      label: "Lower Back",
-      data: [4.3, 2.5, 1.5, 4.1, 2.4, 3.6],
-      fill: false,
-      borderColor: "#742774"
-    }
-  ]
-};
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 export default class Graph extends React.Component {
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            var_FB_data: {},
+            var_LR_data: {},
+            A_x_upper: {},
+            A_x_lower: {},
+            A_z_upper: {},
+            A_z_lower: {},
+
+            date: new Date().toLocaleDateString('en-CA'),
+            time: new Date().toLocaleTimeString('en-GB'),
+        };
+    }
+
+    componentDidMount() {
+        this.retrieveData();
+
+        this.intervalID = setInterval(this.retrieveData.bind(this), 60000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.intervalID)
+    }
+
+    retrieveData() {
+        axios.get(`http://localhost:8000/angles/?user=1&date=${this.state.date}`)
+            .then(res => {
+                this.updateGraphData(res.data);
+            })
+            .catch(err => console.log(err));
+    }
+
+    updateGraphData = (data) => {
+        let i = 0;
+        let A_x_upper = [];
+        let A_x_lower = [];
+        let A_z_upper = [];
+        let A_z_lower = [];
+        let time = []
+
+        while (i < data.length) {
+            A_x_upper = A_x_upper.concat(data[i].A_x_upper)
+            A_x_lower = A_x_lower.concat(data[i].A_x_lower)
+            A_z_upper = A_z_upper.concat(data[i].A_z_upper)
+            A_z_lower = A_z_lower.concat(data[i].A_z_lower)
+            time = time.concat(data[i].time)
+            i++;
+        }
+
+        this.setUpGraph(A_x_upper, A_x_lower, A_z_upper, A_z_lower, time)
+    }
+
+    setUpGraph(A_x_upper, A_x_lower, A_z_upper, A_z_lower, time) {
+        let var_FB_data = {
+            type: 'scatter',
+            labels: time,
+            datasets: [
+                {
+                    label: "Upper Back",
+                    data: A_x_upper,
+                    fill: false,
+                    borderColor: "rgba(75,192,192,1)"
+                },
+                {
+                    label: "Lower Back",
+                    data: A_x_lower,
+                    fill: false,
+                    borderColor: "#742774"
+                }
+                ]
+        }
+
+        let var_LR_data ={
+            type: 'scatter',
+            labels: time,
+            datasets: [
+                {
+                    label: "Upper Back",
+                    data: A_z_upper,
+                    fill: false,
+                    borderColor: "rgba(75,192,192,1)"
+                },
+                {
+                    label: "Lower Back",
+                    data: A_z_lower,
+                    fill: false,
+                    borderColor: "#742774"
+                }
+                ]
+        }
+
+        this.setState({var_FB_data: var_FB_data})
+        this.setState({var_LR_data: var_LR_data})
+    }
+
     render() {
         return (
-            <div className="graph-wrapper">
-                <div>
+            <div className="graphs">
+                <div className="graph-wrapper">
+                    {Object.keys(this.state.var_FB_data).length &&
                     <Line
-                        data={data}
+                        data={this.state.var_FB_data}
+                        width={"500px"}
+                        height={"250px"}
                         options={{
                             responsive: true,
                             maintainAspectRatio: false,
                             title:{
                                 display:true,
-                                text:'Average deviation in deg the forward/backward direction',
+                                text:'Deviation from Calibrated Posture in Forward/Backward Direction',
                                 fontSize:12
                             },
                             legend:{
                                 display:true,
                                 position:'bottom'
-                            }}}
-                    />
+                            },
+                        }}
+                    />}
                 </div>
-                <br/>
-                <div>
+                <div className="graph-wrapper">
+                    {Object.keys(this.state.var_LR_data).length &&
                     <Line
-                        data={data2}
+                        data={this.state.var_LR_data}
+                        width={"500px"}
+                        height={"250px"}
                         options={{
                             responsive: true,
                             maintainAspectRatio: false,
                             title:{
                                 display:true,
-                                text:'Average deviation in deg the left/right direction',
+                                text:'Deviation from Calibrated Posture in Left/Right Direction',
                                 fontSize:12
                             },
                             legend:{
                                 display:true,
                                 position:'bottom'
                             }}}
-                    />
+                    />}
                 </div>
             </div>
         );
     }
 }
-
-// export default class Graph extends React.Component {
-//   render() {
-//     return (
-//       <div className="Graph">
-//         <Pie
-//           data={state}
-//           options={{
-//             title:{
-//               display:true,
-//               text:'Average Rainfall per month',
-//               fontSize:20
-//             },
-//             legend:{
-//               display:true,
-//               position:'right'
-//             }
-//           }}
-//         />
-//
-//         <Doughnut
-//           data={state}
-//           options={{
-//             title:{
-//               display:true,
-//               text:'Average Rainfall per month',
-//               fontSize:20
-//             },
-//             legend:{
-//               display:true,
-//               position:'right'
-//             }
-//           }}
-//         />
-//       </div>
-//     );
-//   }
-// }

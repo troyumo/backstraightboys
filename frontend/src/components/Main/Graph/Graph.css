@@ -2,7 +2,11 @@
   border: 1px solid green ;
   font-family: sans-serif;
   text-align: center;
-  display: flex;
-  flex-direction: column;
   padding: 10px;
+}
+
+.graphs {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 15px;
 }

@@ -2,7 +2,7 @@ import "./Main.css"
 import SettingsPanel from "./Settings Panel/SettingsPanel";
 import CalibrationButton from "./Calibration Button/CalibrationButton";
 import Statistics from "./Statistics/Statistics";
-import CurrentPosture from "./CurrentPosture/CurrentPosture";
+import CurrentPosture from "./Current Posture/CurrentPosture";
 import Graph from "./Graph/Graph";
 import Welcome from "./Welcome/Welcome";
 import React from "react";
@@ -18,12 +18,12 @@ const Main = () => {
                   <div className="Graph">
                       <Graph />
                   </div>
-                  <div className="Stats">
-                      <Statistics />
-                  </div>
               </div>
               <h3> </h3>
               <div className="secondRow">
+                  <div className="Stats">
+                      <Statistics />
+                  </div>
                   <div className="angleView">
                       <CurrentPosture />
                   </div>
