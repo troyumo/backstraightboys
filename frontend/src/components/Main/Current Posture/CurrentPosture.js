@@ -66,7 +66,7 @@ export default class Statistics extends Component {
         time5delay = time5delay.toLocaleTimeString('en-GB')
 
         let mostRecentNotif = this.state.notifications[0]
-        if (time5delay > mostRecentNotif.time) {
+        if (this.state.notifications.length === 0) {
             this.setState({A_x_upper: 'Correct'})
             this.setState({A_z_upper: 'Correct'})
             this.setState({G_y_upper: 'Correct'})
@@ -80,63 +80,67 @@ export default class Statistics extends Component {
                 this.setState({position: 10})
             }
         }
-        else if (mostRecentNotif.message === 'You are leaning forward.') {
-            this.setState({A_x_upper: 'Needs Correction'})
-            this.setState({A_x_lower: 'Needs Correction'})
-            if (this.state.settings.position === 'sitting') {
-                this.setState({position: 4})
-            }
-            else if (this.state.settings.position === 'standing') {
-                this.setState({position: 7})
-            }
-        }
-        else if (mostRecentNotif.message === 'You are leaning backward.') {
-            this.setState({A_x_upper: 'Needs Correction'})
-            this.setState({A_x_lower: 'Needs Correction'})
-            if (this.state.settings.position === 'sitting') {
-                this.setState({position: 3})
-            }
-            else if (this.state.settings.position === 'standing') {
-                this.setState({position: 6})
-            }
-        }
-        else if (mostRecentNotif.message === 'You are leaning right.') {
-            this.setState({A_z_upper: 'Needs Correction'})
-            this.setState({A_z_lower: 'Needs Correction'})
-            if (this.state.settings.position === 'sitting') {
-                this.setState({position: 2})
-            }
-            else if (this.state.settings.position === 'standing') {
-                this.setState({position: 9})
-            }
-        }
-        else if (mostRecentNotif.message === 'You are leaning left.') {
-            this.setState({A_z_upper: 'Needs Correction'})
-            this.setState({A_z_lower: 'Needs Correction'})
-            if (this.state.settings.position === 'sitting') {
-                this.setState({position: 1})
-            }
-            else if (this.state.settings.position === 'standing') {
-                this.setState({position: 8})
-            }
-        }
-        else if (mostRecentNotif.message === 'You are twisting left.') {
-            this.setState({G_y_upper: 'Needs Correction'})
-            this.setState({G_y_lower: 'Needs Correction'})
-            this.setState({position: 11})
-        }
-        else if (mostRecentNotif.message === 'You are twisting right.') {
-            this.setState({G_y_upper: 'Needs Correction'})
-            this.setState({G_y_lower: 'Needs Correction'})
-            this.setState({position: 12})
-        }
         else {
-            this.setState({A_x_upper: ''})
-            this.setState({A_z_upper: ''})
-            this.setState({G_y_upper: ''})
-            this.setState({A_x_lower: ''})
-            this.setState({A_z_lower: ''})
-            this.setState({G_y_lower: ''})
+            if (time5delay > mostRecentNotif.time) {
+                this.setState({A_x_upper: 'Correct'})
+                this.setState({A_z_upper: 'Correct'})
+                this.setState({G_y_upper: 'Correct'})
+                this.setState({A_x_lower: 'Correct'})
+                this.setState({A_z_lower: 'Correct'})
+                this.setState({G_y_lower: 'Correct'})
+                if (this.state.settings.position === 'sitting') {
+                    this.setState({position: 5})
+                } else if (this.state.settings.position === 'standing') {
+                    this.setState({position: 10})
+                }
+            } else if (mostRecentNotif.message === 'You are leaning forward.') {
+                this.setState({A_x_upper: 'Needs Correction'})
+                this.setState({A_x_lower: 'Needs Correction'})
+                if (this.state.settings.position === 'sitting') {
+                    this.setState({position: 4})
+                } else if (this.state.settings.position === 'standing') {
+                    this.setState({position: 7})
+                }
+            } else if (mostRecentNotif.message === 'You are leaning backward.') {
+                this.setState({A_x_upper: 'Needs Correction'})
+                this.setState({A_x_lower: 'Needs Correction'})
+                if (this.state.settings.position === 'sitting') {
+                    this.setState({position: 3})
+                } else if (this.state.settings.position === 'standing') {
+                    this.setState({position: 6})
+                }
+            } else if (mostRecentNotif.message === 'You are leaning right.') {
+                this.setState({A_z_upper: 'Needs Correction'})
+                this.setState({A_z_lower: 'Needs Correction'})
+                if (this.state.settings.position === 'sitting') {
+                    this.setState({position: 2})
+                } else if (this.state.settings.position === 'standing') {
+                    this.setState({position: 9})
+                }
+            } else if (mostRecentNotif.message === 'You are leaning left.') {
+                this.setState({A_z_upper: 'Needs Correction'})
+                this.setState({A_z_lower: 'Needs Correction'})
+                if (this.state.settings.position === 'sitting') {
+                    this.setState({position: 1})
+                } else if (this.state.settings.position === 'standing') {
+                    this.setState({position: 8})
+                }
+            } else if (mostRecentNotif.message === 'You are twisting left.') {
+                this.setState({G_y_upper: 'Needs Correction'})
+                this.setState({G_y_lower: 'Needs Correction'})
+                this.setState({position: 11})
+            } else if (mostRecentNotif.message === 'You are twisting right.') {
+                this.setState({G_y_upper: 'Needs Correction'})
+                this.setState({G_y_lower: 'Needs Correction'})
+                this.setState({position: 12})
+            } else {
+                this.setState({A_x_upper: ''})
+                this.setState({A_z_upper: ''})
+                this.setState({G_y_upper: ''})
+                this.setState({A_x_lower: ''})
+                this.setState({A_z_lower: ''})
+                this.setState({G_y_lower: ''})
+            }
         }
     }
 

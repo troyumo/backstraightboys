@@ -10,12 +10,6 @@ main {
   align-items: center;
 }
 
-.welcome > h1 {
-  font-size: 24px;
-  color: darkslategrey;
-  margin-bottom: 5px;
-}
-
 .mainContainer {
   padding: 16px 28px;
   text-align: center;
@@ -26,7 +20,7 @@ main {
   /*gradient code from http://www.webdesignerwall.com/tutorials/cross-browser-css-gradient*/
 
   display: grid;
-  grid-gap: 5px;
+  grid-gap: 2px;
 }
 
 .firstRow {

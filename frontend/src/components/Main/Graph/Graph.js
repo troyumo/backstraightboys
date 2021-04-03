@@ -112,7 +112,7 @@ export default class Graph extends React.Component {
                     {Object.keys(this.state.var_FB_data).length &&
                     <Line
                         data={this.state.var_FB_data}
-                        width={"500px"}
+                        width={"650px"}
                         height={"250px"}
                         options={{
                             responsive: true,
@@ -133,7 +133,7 @@ export default class Graph extends React.Component {
                     {Object.keys(this.state.var_LR_data).length &&
                     <Line
                         data={this.state.var_LR_data}
-                        width={"500px"}
+                        width={"650px"}
                         height={"250px"}
                         options={{
                             responsive: true,
