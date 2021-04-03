@@ -1,6 +1,7 @@
 .settings {
-  border: 1px solid green;
+  border: 1px solid darkgrey;
   padding: 5px;
+  background-color: white;
 }
 .settings > table {
   border-collapse: collapse;

@@ -1,6 +1,7 @@
 .Angle {
-  border: 1px solid green ;
+  border: 1px solid darkgrey ;
   padding: 5px;
+  background-color: white;
   /*min-height: 100%;*/
 }
 
@@ -16,7 +17,7 @@
 }
 
 .StickFigure {
-  border: 1px solid green;
+  border: 1px solid darkgrey;
   padding: 5px;
-  background-color: dimgrey;
+  background-color: grey;
 }
