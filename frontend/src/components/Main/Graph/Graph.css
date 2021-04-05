@@ -1,0 +1,13 @@
+.graph-wrapper {
+  border: 1px solid darkgrey ;
+  font-family: sans-serif;
+  text-align: center;
+  padding: 10px;
+  background-color: white;
+}
+
+.graphs {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 15px;
+}

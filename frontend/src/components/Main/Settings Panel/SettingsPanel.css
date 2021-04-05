@@ -1,0 +1,12 @@
+.settings {
+  border: 1px solid darkgrey;
+  padding: 5px;
+  background-color: white;
+}
+.settings > table {
+  border-collapse: collapse;
+}
+
+.submit-button {
+  padding: 5px;
+}
