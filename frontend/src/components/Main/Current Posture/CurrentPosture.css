@@ -1,0 +1,23 @@
+.Angle {
+  border: 1px solid darkgrey ;
+  padding: 5px;
+  background-color: white;
+  /*min-height: 100%;*/
+}
+
+.Angle > table, th, td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.PostureVisualizer {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 10px;
+}
+
+.StickFigure {
+  border: 1px solid darkgrey;
+  padding: 5px;
+  background-color: grey;
+}
