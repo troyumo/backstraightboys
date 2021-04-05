@@ -144,7 +144,7 @@ export default class Statistics extends Component {
         }
     }
 
-    renderImage(position) {
+    renderImage() {
     if (this.state.position === 1) {
         return <div>
             <img src={images.p2} alt="Sitting; Leaning Left" width={250} height={250}/>
